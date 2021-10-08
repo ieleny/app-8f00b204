@@ -13,9 +13,16 @@ class ProductsController extends Controller
         return ProductsModel::orderBy('products_name')->get();
     }
 
-    public function listProduct()
+    public function getProduct($id)
     {
-
+        if (ProductsModel::where('id', $id)->exists()) {
+            $product = ProductsModel::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($product, 200);
+        } else {
+            return response()->json([
+              "message" => "Produto não encontrado!"
+            ], 404);
+        }
     }
 
     public function createProduct(ProductsRequest $request)
