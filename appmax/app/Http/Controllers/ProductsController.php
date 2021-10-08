@@ -28,9 +28,9 @@ class ProductsController extends Controller
     public function createProduct(ProductsRequest $request)
     {
         $product = new ProductsModel;
-        $product->products_name = $request->name;
-        $product->products_quantity = is_null($request->quantity) ? 0 : $request->quantity;
-        $product->products_sku = $product->generateSku();
+            $product->products_name = $request->name;
+            $product->products_quantity = is_null($request->quantity) ? 0 : $request->quantity;
+            $product->products_sku = $product->generateSku();
         $product->save();
 
         return response()->json([
