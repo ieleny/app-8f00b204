@@ -14,7 +14,7 @@ class ProductsMovement extends Migration
     public function up()
     {
         Schema::create('products_movement', function (Blueprint $table) {
-            $table->integer('products_sku');
+            $table->string('products_sku')->unique();
             $table->float('products_movement_quantity', 10,3);
             $table->foreignId('products_id')->constrained('products');
             $table->timestamps();

@@ -15,7 +15,7 @@ class Products extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->bigInteger('products_sku')->unique();
+            $table->string('products_sku')->unique();
             $table->string('products_name');
             $table->float('products_quantity', 10,3);
             $table->timestamps();
