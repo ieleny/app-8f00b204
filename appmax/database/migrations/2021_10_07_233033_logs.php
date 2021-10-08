@@ -14,7 +14,7 @@ class Logs extends Migration
     public function up()
     {
         Schema::create('logs', function (Blueprint $table) {
-            $table->integer('products_sku');
+            $table->string('products_sku')->unique();
             $table->float('products_quantity', 10,3);
             $table->float('logs_action', 10,3);
             $table->timestamps();
