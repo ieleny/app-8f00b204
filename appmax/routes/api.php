@@ -20,7 +20,7 @@ Route::group(['prefix' => 'v1'], function(){
 
     Route::group(['prefix' => 'products'], function() {
         Route::get('list', [ProductsController::class, 'list']);
-        Route::get('{id}', [ProductsController::class, 'list']);
+        Route::get('{id}', [ProductsController::class, 'getProduct']);
 
         Route::post('create', [ProductsController::class, 'createProduct']);
     });
