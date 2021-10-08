@@ -7,6 +7,7 @@ use App\Models\ProductsModel;
 use App\Http\Controllers\ProductsMovementController;
 use App\Http\Controllers\LogsController;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\ProductsRequest;
 
 class ProductsController extends Controller
@@ -40,7 +41,7 @@ class ProductsController extends Controller
         }
     }
 
-    public function createProduct(ProductsRequest $request)
+    public function create(ProductsRequest $request)
     {
         $product = $this->saveProducts($request);
         $product->save();
@@ -56,11 +57,48 @@ class ProductsController extends Controller
         $logs->save();
 
         return response()->json([
-            "message" => "Produto foi salvo com sucesso!"
+            "menssagem" => "Produto foi salvo com sucesso!"
         ], 201);
     }
 
-    public function saveProducts($request): ProductsModel
+    public function update($id, Request $request)
+    {
+        $isValidate = $this->validateUpdate($id);
+
+        if($isValidate)
+        {
+            $product = ProductsModel::find($id);
+
+                $request->name = is_null($request->name) 
+                        ? $product->name 
+                        : $request->name;
+
+                $request->quantity = is_null($request->quantity) 
+                        ? $product->quantity 
+                        : $request->quantity;
+
+            $product->save();
+
+            return response()->json([
+                "menssagem" => "Produto foi atualizado com sucesso!"
+            ], 201);
+        }else{
+            return response()->json([
+                "menssagem" => "Produto não encontrado!"
+              ], 404);
+        }
+    }
+
+    private function validateUpdate($id)
+    {
+        if(!ProductsModel::where('id', $id)->exists()){
+            return false;
+        }
+
+        return true;
+    }
+
+    private function saveProducts($request): ProductsModel
     {
         $product = new ProductsModel;
         $product->products_name = $request->name;
@@ -70,13 +108,4 @@ class ProductsController extends Controller
         return $product;
     }
 
-    public function updateProduct()
-    {
-
-    }
-
-    public function updateQuantity()
-    {
-
-    }
 }
