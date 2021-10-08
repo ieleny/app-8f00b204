@@ -22,6 +22,7 @@ Route::group(['prefix' => 'v1'], function(){
         Route::get('list', [ProductsController::class, 'list']);
         Route::get('{id}', [ProductsController::class, 'getProduct']);
 
-        Route::post('create', [ProductsController::class, 'createProduct']);
+        Route::post('create', [ProductsController::class, 'create']);
+        Route::put('update/{id}', [ProductsController::class, 'update']);
     });
 });
