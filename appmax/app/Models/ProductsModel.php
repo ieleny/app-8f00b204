@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\ProductsMovementModel;
+
 class ProductsModel extends Model
 {
     use HasFactory;
 
     protected $table = 'products';
     protected $fillable = ['products_name', 'products_sku','products_quantity'];
-
 
     public function generateSku()
     {
@@ -26,7 +27,12 @@ class ProductsModel extends Model
             $unique_no = $unique_no + 1;
         }
 
-        return $unique_no;
+        return 'PRO'.$unique_no;
+    }
+
+    public function productsMovement()
+    {
+        return $this->belongsTo(ProductsMovementModel::class, 'id');
     }
 
 }
