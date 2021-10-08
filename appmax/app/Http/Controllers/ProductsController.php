@@ -2,12 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\ProductsModel;
+
+use App\Http\Controllers\ProductsMovementController;
+use App\Http\Controllers\LogsController;
+
 use App\Http\Requests\ProductsRequest;
 
 class ProductsController extends Controller
 {
+    protected $productsMovementController;
+    protected $logsController;
+
+    public function __construct(
+        ProductsMovementController $productsMovementController,
+        LogsController $logsController
+    )
+    {
+       $this->productsMovementController = $productsMovementController;
+       $this->logsController = $logsController;
+    }
+
     public function list()
     {
         return ProductsModel::orderBy('products_name')->get();
@@ -27,15 +42,32 @@ class ProductsController extends Controller
 
     public function createProduct(ProductsRequest $request)
     {
-        $product = new ProductsModel;
-            $product->products_name = $request->name;
-            $product->products_quantity = is_null($request->quantity) ? 0 : $request->quantity;
-            $product->products_sku = $product->generateSku();
+        $product = $this->saveProducts($request);
         $product->save();
+
+        $productsMovement = $this->productsMovementController
+                ->saveProductsMovement($product);
+
+        $product->productsMovement()->associate($productsMovement);
+        $productsMovement->save();
+
+        $logs = $this->logsController
+                ->saveLog($product, 'PRODUCTSAVE');
+        $logs->save();
 
         return response()->json([
             "message" => "Produto foi salvo com sucesso!"
         ], 201);
+    }
+
+    public function saveProducts($request): ProductsModel
+    {
+        $product = new ProductsModel;
+        $product->products_name = $request->name;
+        $product->products_quantity = is_null($request->quantity) ? 0 : $request->quantity;
+        $product->products_sku = $product->generateSku();
+        
+        return $product;
     }
 
     public function updateProduct()
