@@ -20,3 +20,7 @@ Executar o projeto:
 
 > Acessar a pasta appmax, e executar o comando abaixo:
     > php artisan serve
+
+Verbos: 
+> Produtos:
+    > http://127.0.0.1:8000/api/v1/products/list
