@@ -1,22 +1,22 @@
 # app-8f00b204e9800998ecf8427e
 
-Objetivo:
+# Objetivo:
     Criar um controle de estoque
 
-Requisitos:
+# Requisitos:
 
-# Back-end:
+## Back-end:
 > php --version: ^7.3|^8.0
 
 > Laravel --version: Laravel v8.63.0
 
-# Banco de dados:
+## Banco de dados:
 > Mysql --version: 5.7
 > Nome da base: 
 
-# Executar o projeto:
+## Executar o projeto:
 
-## Todos os comandos a seguir, serão executados na pasta 'appmax'
+### Todos os comandos a seguir, serão executados na pasta 'appmax'
 
 > Executar o composer:
 > composer install
@@ -28,7 +28,7 @@ Requisitos:
 > Rodar a aplicação:
     > php artisan serve
 
-# Verbos: 
+## Verbos: 
 
 > Produtos:
     Tipo: GEt
