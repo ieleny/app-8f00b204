@@ -7,6 +7,23 @@ use App\Models\LogsModel;
 class LogsController extends Controller
 {
 
+    public function list()
+    {
+        return LogsModel::orderBy('products_sku')->get();
+    }
+
+    public function getProduct($id)
+    {
+        if (LogsModel::where('products_sku', $id)->exists()) {
+            $product = LogsModel::where('products_sku', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($product, 200);
+        } else {
+            return response()->json([
+              "message" => "Produto nao encontrado!"
+            ], 404);
+        }
+    }
+
     public function saveLog($product, $action):LogsModel
     {
         $logs = new LogsModel;

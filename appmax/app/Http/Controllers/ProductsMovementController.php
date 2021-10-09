@@ -8,6 +8,24 @@ use App\Models\ProductsMovementModel;
 
 class ProductsMovementController extends Controller
 {
+    public function list()
+    {
+        return ProductsMovementModel::orderBy('products_sku')->get();
+    }
+
+    public function getProduct($id)
+    {
+        if (ProductsMovementModel::where('products_sku', $id)->exists()) {
+            $product = ProductsMovementModel::where('products_sku', $id)
+                       ->get()->toJson(JSON_PRETTY_PRINT);
+            return response($product, 200);
+        } else {
+            return response()->json([
+              "message" => "Produto nao encontrado!"
+            ], 404);
+        }
+    }
+
     public function saveProductsMovement($product): ProductsMovementModel
     {
         $productsMovement = new ProductsMovementModel;
