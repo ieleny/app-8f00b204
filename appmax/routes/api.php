@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ProductsMovementController;
+use App\Http\Controllers\LogsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +26,15 @@ Route::group(['prefix' => 'v1'], function(){
 
         Route::post('create', [ProductsController::class, 'create']);
         Route::put('update/{id}', [ProductsController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'productsMovement'], function() {
+        Route::get('list', [ProductsMovementController::class, 'list']);
+        Route::get('{id}', [ProductsMovementController::class, 'getProduct']);
+    });
+
+    Route::group(['prefix' => 'logs'], function() {
+        Route::get('list', [LogsController::class, 'list']);
+        Route::get('{id}', [LogsController::class, 'getProduct']);
     });
 });
