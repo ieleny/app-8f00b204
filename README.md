@@ -5,17 +5,18 @@ Objetivo:
 
 Requisitos:
 
-Back-end:
+# Back-end:
 > php --version: ^7.3|^8.0
 
 > Laravel --version: Laravel v8.63.0
 
-Banco de dados:
+# Banco de dados:
 > Mysql --version: 5.7
+> Nome da base: 
 
-Executar o projeto:
+# Executar o projeto:
 
-Todos os comandos a seguir, serão executados na pasta 'appmax'
+## Todos os comandos a seguir, serão executados na pasta 'appmax'
 
 > Executar o composer:
 > composer install
@@ -24,9 +25,11 @@ Todos os comandos a seguir, serão executados na pasta 'appmax'
     > php artisan db:create
     > php artisan migrate
 
-> Acessar a pasta appmax, e executar o comando abaixo:
+> Rodar a aplicação:
     > php artisan serve
 
-Verbos: 
+# Verbos: 
+
 > Produtos:
-    > http://127.0.0.1:8000/api/v1/products/list
+    Tipo: GEt
+    Url: http://127.0.0.1:8000/api/v1/products/list
