@@ -85,6 +85,16 @@ class ProductsController extends Controller
 
             $product->save();
 
+            $productsMovement = $this->productsMovementController
+                                ->saveProductsMovement($product);
+
+            $product->productsMovement()->associate($productsMovement);
+            $productsMovement->save();
+
+            $logs = $this->logsController
+                    ->saveLog($product, 'UPDATESAVE');
+            $logs->save();
+
             return response()->json([
                 "mensagem" => "Produto foi atualizado com sucesso!"
             ], 201);
