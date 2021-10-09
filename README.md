@@ -14,20 +14,22 @@
 ### Obs: Para colocar os dados do seu banco local, é preciso criar um arquivo '.env' copiando do exemplo que tem no projeto '.env.example'
 
 > Mysql --version: 5.7
+
 > Nome da base: appmax_challenge
 
 ## Executar o projeto:
 
 ### Todos os comandos a seguir, serão executados na pasta 'appmax'
 
-> Executar o composer:
+### Executar o composer:
 > composer install
 
-> Executar as migration:
+### Executar as migration:
 > php artisan db:create
 > php artisan migrate
 
-> Rodar a aplicação:
+### Rodar a aplicação:
+
 > php artisan serve
 
 ## Verbos: 
