@@ -36,7 +36,7 @@ class ProductsController extends Controller
             return response($product, 200);
         } else {
             return response()->json([
-              "message" => "Produto não encontrado!"
+              "message" => "Produto nao encontrado!"
             ], 404);
         }
     }
@@ -45,16 +45,7 @@ class ProductsController extends Controller
     {
         $product = $this->saveProducts($request);
         $product->save();
-
-        $productsMovement = $this->productsMovementController
-                ->saveProductsMovement($product);
-
-        $product->productsMovement()->associate($productsMovement);
-        $productsMovement->save();
-
-        $logs = $this->logsController
-                ->saveLog($product, 'PRODUCTSAVE');
-        $logs->save();
+        $this->saveHistoric($product,'SAVELOG');
 
         return response()->json([
             "menssagem" => "Produto foi salvo com sucesso!"
@@ -85,15 +76,7 @@ class ProductsController extends Controller
 
             $product->save();
 
-            $productsMovement = $this->productsMovementController
-                                ->saveProductsMovement($product);
-
-            $product->productsMovement()->associate($productsMovement);
-            $productsMovement->save();
-
-            $logs = $this->logsController
-                    ->saveLog($product, 'UPDATESAVE');
-            $logs->save();
+            $this->saveHistoric($product, 'UPDATELOG');
 
             return response()->json([
                 "mensagem" => "Produto foi atualizado com sucesso!"
@@ -111,7 +94,7 @@ class ProductsController extends Controller
         $validation = false;
 
         if(!ProductsModel::where('id', $id)->exists()){
-            $mensagem = "Produto não encontrado!";
+            $mensagem = "Produto nao encontrado!";
             $validation = true;
         }
 
@@ -154,7 +137,7 @@ class ProductsController extends Controller
 
             if($quantity < 0)
             {
-                $mensagem =  "O estoque não pode ficar negativo!";
+                $mensagem =  "O estoque nao pode ficar negativo!";
             }             
         }
         
@@ -185,6 +168,20 @@ class ProductsController extends Controller
         $product->products_sku = $product->generateSku();
         
         return $product;
+    }
+
+    private function saveHistoric($product, $keyLog)
+    {
+        $productsMovement = $this->productsMovementController
+                                ->saveProductsMovement($product);
+
+        $product->productsMovement()->associate($productsMovement);
+        $productsMovement->save();
+
+        $logs = $this->logsController
+                ->saveLog($product, $keyLog);
+        $logs->save();
+
     }
 
 }
