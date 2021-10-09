@@ -12,10 +12,10 @@ class LogsController extends Controller
         return LogsModel::orderBy('products_sku')->get();
     }
 
-    public function getProduct($id)
+    public function getProduct($sku)
     {
-        if (LogsModel::where('products_sku', $id)->exists()) {
-            $product = LogsModel::where('products_sku', $id)->get()->toJson(JSON_PRETTY_PRINT);
+        if (LogsModel::where('products_sku', $sku)->exists()) {
+            $product = LogsModel::where('products_sku', $sku)->get()->toJson(JSON_PRETTY_PRINT);
             return response($product, 200);
         } else {
             return response()->json([
