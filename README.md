@@ -7,12 +7,18 @@ Requisitos:
 
 Back-end:
 > php --version: ^7.3|^8.0
+
 > Laravel --version: Laravel v8.63.0
 
 Banco de dados:
 > Mysql --version: 5.7
 
 Executar o projeto:
+
+Todos os comandos a seguir, serão executados na pasta 'appmax'
+
+> Executar o composer:
+> composer install
 
 > Executar as migration:
     > php artisan db:create
