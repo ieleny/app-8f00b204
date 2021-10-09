@@ -60,7 +60,7 @@ class ProductsMovementController extends Controller
 
             $product->save();
 
-            $this->saveHistoric($product, 'UPDATELOG');
+            $this->saveHistoric($product, 'UPDATEPRODUCTMOVEMENTLOG');
 
             return response()->json([
                 "mensagem" => "Produto foi atualizado com sucesso!"

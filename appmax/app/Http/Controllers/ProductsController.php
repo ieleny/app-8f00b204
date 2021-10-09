@@ -45,7 +45,7 @@ class ProductsController extends Controller
     {
         $product = $this->saveProducts($request);
         $product->save();
-        $this->saveHistoric($product,'SAVELOG');
+        $this->saveHistoric($product,'SAVEPRODUCTLOG');
 
         return response()->json([
             "menssagem" => "Produto foi salvo com sucesso!"
