@@ -11,8 +11,10 @@
 > Laravel --version: Laravel v8.63.0
 
 ## Banco de dados:
+### Obs: Para colocar os dados do seu banco local, é preciso criar um arquivo '.env' copiando do exemplo que tem no projeto '.env.example'
+
 > Mysql --version: 5.7
-> Nome da base: 
+> Nome da base: appmax_challenge
 
 ## Executar o projeto:
 
@@ -31,5 +33,6 @@
 ## Verbos: 
 
 > Produtos:
-    Tipo: GEt
+    Tipo: GET
+    
     Url: http://127.0.0.1:8000/api/v1/products/list
