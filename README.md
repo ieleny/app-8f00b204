@@ -26,6 +26,7 @@
 
 ### Executar as migration:
 > php artisan db:create
+
 > php artisan migrate
 
 ### Rodar a aplicação:
