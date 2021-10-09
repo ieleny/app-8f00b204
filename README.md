@@ -24,11 +24,11 @@
 > composer install
 
 > Executar as migration:
-    > php artisan db:create
-    > php artisan migrate
+> php artisan db:create
+> php artisan migrate
 
 > Rodar a aplicação:
-    > php artisan serve
+> php artisan serve
 
 ## Verbos: 
 
