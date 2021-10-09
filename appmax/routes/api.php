@@ -25,16 +25,17 @@ Route::group(['prefix' => 'v1'], function(){
         Route::get('{id}', [ProductsController::class, 'getProduct']);
 
         Route::post('create', [ProductsController::class, 'create']);
-        Route::put('update/{id}', [ProductsController::class, 'update']);
     });
 
     Route::group(['prefix' => 'productsMovement'], function() {
         Route::get('list', [ProductsMovementController::class, 'list']);
-        Route::get('{id}', [ProductsMovementController::class, 'getProduct']);
+        Route::get('{sku}', [ProductsMovementController::class, 'getProductsMovement']);
+
+        Route::put('{id}', [ProductsMovementController::class, 'movementStock']);
     });
 
     Route::group(['prefix' => 'logs'], function() {
         Route::get('list', [LogsController::class, 'list']);
-        Route::get('{id}', [LogsController::class, 'getProduct']);
+        Route::get('{sku}', [LogsController::class, 'getProduct']);
     });
 });
