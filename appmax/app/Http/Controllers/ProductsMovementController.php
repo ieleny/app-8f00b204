@@ -17,7 +17,7 @@ class ProductsMovementController extends Controller
     {
         if (ProductsMovementModel::where('products_sku', $id)->exists()) {
             $product = ProductsMovementModel::where('products_sku', $id)
-                       ->get()->toJson(JSON_PRETTY_PRINT);
+                        ->get()->toJson(JSON_PRETTY_PRINT);
             return response($product, 200);
         } else {
             return response()->json([
